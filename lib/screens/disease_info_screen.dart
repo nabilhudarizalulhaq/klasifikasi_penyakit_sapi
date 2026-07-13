@@ -71,8 +71,10 @@ class DiseaseInfoScreen extends StatelessWidget {
                     color: AppColors.emeraldLight,
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(
-                    Icons.pets_outlined,
+                  child: Image(
+                    image: AssetImage('assets/icons/animal.png'),
+                    width: 20,
+                    height: 20,
                     color: AppColors.emerald,
                   ),
                 ),
@@ -87,7 +89,7 @@ class DiseaseInfoScreen extends StatelessWidget {
                   Text(
                     d.$2,
                     style: const TextStyle(
-                      color: AppColors.slate600,
+                      color: AppColors.emeraldDark,
                       height: 1.5,
                     ),
                   ),

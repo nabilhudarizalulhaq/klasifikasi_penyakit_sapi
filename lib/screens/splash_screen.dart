@@ -86,9 +86,9 @@ class _SplashScreenState extends State<SplashScreen> {
                       style: TextStyle(fontSize: 14, color: AppColors.slate600),
                     ),
                     const SizedBox(height: 34),
-                    const Icon(
-                      Icons.pets_outlined,
-                      size: 82,
+                    const Image(
+                      image: AssetImage('assets/icons/animal.png'),
+                      width: 50,
                       color: AppColors.emerald,
                     ),
                   ],
