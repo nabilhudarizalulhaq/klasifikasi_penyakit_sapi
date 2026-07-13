@@ -1,20 +1,38 @@
 import 'package:flutter/material.dart';
 import '../models/app_models.dart';
+import '../services/database_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/common_widgets.dart';
 import 'processing_screen.dart';
 
 class SymptomScreen extends StatefulWidget {
-  const SymptomScreen({super.key, required this.cows, required this.history});
-  final List<Cow> cows;
-  final List<DiagnosisHistory> history;
+  const SymptomScreen({super.key});
   @override
   State<SymptomScreen> createState() => _SymptomScreenState();
 }
 
 class _SymptomScreenState extends State<SymptomScreen> {
   final Set<String> selected = {};
+  final List<Cow> cows = [];
   Cow? selectedCow;
+  bool loading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCows();
+  }
+
+  Future<void> _loadCows() async {
+    final data = await DatabaseService.instance.getCows();
+    if (!mounted) return;
+    setState(() {
+      cows
+        ..clear()
+        ..addAll(data);
+      loading = false;
+    });
+  }
   static const symptoms = [
     ('demam', 'Demam', 'Suhu tubuh meningkat'),
     ('nafsu-makan', 'Nafsu makan menurun', 'Tidak menghabiskan pakan'),
@@ -67,13 +85,17 @@ class _SymptomScreenState extends State<SymptomScreen> {
           child: ListView(
             padding: const EdgeInsets.fromLTRB(20, 18, 20, 120),
             children: [
-              if (widget.cows.isNotEmpty) ...[
+              if (loading) ...[
+                const LinearProgressIndicator(color: AppColors.emerald),
+                const SizedBox(height: 16),
+              ],
+              if (cows.isNotEmpty) ...[
                 DropdownButtonFormField<Cow>(
                   initialValue: selectedCow,
                   decoration: const InputDecoration(
                     labelText: 'Pilih sapi (opsional)',
                   ),
-                  items: widget.cows
+                  items: cows
                       .map(
                         (c) => DropdownMenuItem(value: c, child: Text(c.name)),
                       )
@@ -126,7 +148,6 @@ class _SymptomScreenState extends State<SymptomScreen> {
                     builder: (_) => ProcessingScreen(
                       symptoms: selected.toList(),
                       cow: selectedCow,
-                      history: widget.history,
                     ),
                   ),
                 ),

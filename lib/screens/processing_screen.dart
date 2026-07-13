@@ -9,11 +9,9 @@ class ProcessingScreen extends StatefulWidget {
     super.key,
     required this.symptoms,
     required this.cow,
-    required this.history,
   });
   final List<String> symptoms;
   final Cow? cow;
-  final List<DiagnosisHistory> history;
   @override
   State<ProcessingScreen> createState() => _ProcessingScreenState();
 }
@@ -32,7 +30,6 @@ class _ProcessingScreenState extends State<ProcessingScreen> {
           builder: (_) => ResultScreen(
             result: result,
             cow: widget.cow,
-            history: widget.history,
           ),
         ),
       );
