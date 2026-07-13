@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:klasifikasi_penyakit_sapi/pages/home/home.dart';
-import 'package:klasifikasi_penyakit_sapi/pages/splash/splash.dart';
+import 'package:google_fonts/google_fonts.dart';
 
+import 'screens/splash_screen.dart';
+import 'theme/app_theme.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const DiagnosisSapiApp());
 }
 
@@ -15,38 +17,10 @@ class DiagnosisSapiApp extends StatelessWidget {
     return MaterialApp(
       title: 'Sistem Diagnosis Penyakit Sapi',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-        scaffoldBackgroundColor: Colors.white,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF10B981),
-        ),
+      theme: AppTheme.light.copyWith(
+        textTheme: GoogleFonts.interTextTheme(AppTheme.light.textTheme),
       ),
-      home: const SplashPage(),
+      home: const SplashScreen(),
     );
   }
 }
-
-class SplashPage extends StatelessWidget {
-  const SplashPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Sistem Diagnosis Penyakit Sapi',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-        scaffoldBackgroundColor: Colors.white,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF10B981),
-        ),
-      ),
-      routes: {
-        '/': (context) => const SplashPage(),
-        '/home': (context) => const HomePage(),
-      },
-    );
-  }
-}
-

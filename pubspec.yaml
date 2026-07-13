@@ -64,8 +64,8 @@ flutter:
     - assets/
     - assets/icons/
     - assets/images/
-    # - assets/model/decision_tree_penyakit_sapi.tflite
-    # - assets/model/labels.txt
+    - assets/models/decision_tree_penyakit_sapi.tflite
+    - assets/models/labels.txt
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
