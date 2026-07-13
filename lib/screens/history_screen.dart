@@ -3,7 +3,106 @@ import '../models/app_models.dart';
 import '../theme/app_theme.dart';
 import '../widgets/common_widgets.dart';
 
-class HistoryScreen extends StatelessWidget{
-  const HistoryScreen({super.key,required this.history}); final List<DiagnosisHistory> history;
-  @override Widget build(BuildContext context)=>Scaffold(appBar:const ScreenHeader(title:'Riwayat Diagnosis'),body:history.isEmpty?Center(child:Padding(padding:const EdgeInsets.all(28),child:AppCard(child:Column(mainAxisSize:MainAxisSize.min,children:[const Icon(Icons.history,size:58,color:AppColors.slate400),const SizedBox(height:14),const Text('Belum Ada Riwayat',style:TextStyle(fontSize:18,fontWeight:FontWeight.w700)),const SizedBox(height:6),const Text('Hasil diagnosis yang disimpan akan tampil di halaman ini.',textAlign:TextAlign.center,style:TextStyle(color:AppColors.slate500))])))):ListView.separated(padding:const EdgeInsets.all(24),itemCount:history.length,separatorBuilder:(_,_)=>const SizedBox(height:14),itemBuilder:(context,i){final h=history[i];final date='${h.date.day.toString().padLeft(2,'0')}/${h.date.month.toString().padLeft(2,'0')}/${h.date.year}';return AppCard(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Row(children:[Expanded(child:Text(h.cowName,style:const TextStyle(fontSize:16,fontWeight:FontWeight.w700))),Text(date,style:const TextStyle(fontSize:12,color:AppColors.slate400))]),const SizedBox(height:10),Text(h.result.disease,style:const TextStyle(color:AppColors.emeraldDark,fontWeight:FontWeight.w700)),const SizedBox(height:8),Row(children:[const Icon(Icons.analytics_outlined,size:18,color:AppColors.slate400),const SizedBox(width:6),Text('Keyakinan ${h.result.confidence}% • Risiko ${h.result.severity}',style:const TextStyle(fontSize:13,color:AppColors.slate500))]) ]));}));
+class HistoryScreen extends StatelessWidget {
+  const HistoryScreen({super.key, required this.history});
+  final List<DiagnosisHistory> history;
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    appBar: const ScreenHeader(title: 'Riwayat Diagnosis'),
+    body: history.isEmpty
+        ? Center(
+            child: Padding(
+              padding: const EdgeInsets.all(28),
+              child: AppCard(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(
+                      Icons.history,
+                      size: 58,
+                      color: AppColors.slate400,
+                    ),
+                    const SizedBox(height: 14),
+                    const Text(
+                      'Belum Ada Riwayat',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    const Text(
+                      'Hasil diagnosis yang disimpan akan tampil di halaman ini.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: AppColors.slate500),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          )
+        : ListView.separated(
+            padding: const EdgeInsets.all(24),
+            itemCount: history.length,
+            separatorBuilder: (_, _) => const SizedBox(height: 14),
+            itemBuilder: (context, i) {
+              final h = history[i];
+              final date =
+                  '${h.date.day.toString().padLeft(2, '0')}/${h.date.month.toString().padLeft(2, '0')}/${h.date.year}';
+              return AppCard(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            h.cowName,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          date,
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: AppColors.slate400,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      h.result.disease,
+                      style: const TextStyle(
+                        color: AppColors.emeraldDark,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.analytics_outlined,
+                          size: 18,
+                          color: AppColors.slate400,
+                        ),
+                        const SizedBox(width: 6),
+                        Text(
+                          'Keyakinan ${h.result.confidence}% • Risiko ${h.result.severity}',
+                          style: const TextStyle(
+                            fontSize: 13,
+                            color: AppColors.slate500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+  );
 }
