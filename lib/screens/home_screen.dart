@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:klasifikasi_penyakit_sapi/screens/info%20desease/disease_info_screen.dart';
 
 import '../services/database_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/common_widgets.dart';
-import 'about_screen.dart';
+import 'about/about_screen.dart';
 import 'cow_data_screen.dart';
-import 'disease_info_screen.dart';
+import 'info desease/disease_info_data.dart';
 import 'history_screen.dart';
 import 'symptom_screen.dart';
 
